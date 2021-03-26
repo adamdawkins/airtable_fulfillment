@@ -1,7 +1,7 @@
 development:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: jumpstart_development
+  channel_prefix: airtable_fulfillment_development
 
 test:
   adapter: async
@@ -9,9 +9,9 @@ test:
 staging:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: jumpstart_staging
+  channel_prefix: airtable_fulfillment_staging
 
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: jumpstart_production
+  channel_prefix: airtable_fulfillment_production
