@@ -89,3 +89,8 @@ gem "whenever", require: false
 if File.exist?("config/jumpstart/Gemfile")
   eval_gemfile "config/jumpstart/Gemfile"
 end
+
+# Point to yanked v0.3.5
+# # Temporary workaround for https://github.com/rails/rails/issues/41757 until fix is released
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+
