@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  resources :orders
   # Jumpstart views
   if Rails.env.development? || Rails.env.test?
     mount Jumpstart::Engine, at: "/jumpstart"
@@ -32,12 +35,13 @@ Rails.application.routes.draw do
   end
 
   # API routes
-  namespace :api, defaults: {format: :json} do
+  namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resource :auth
       resource :me, controller: :me
       resources :accounts
       resources :users
+      resources :orders
     end
   end
 
@@ -65,7 +69,6 @@ Rails.application.routes.draw do
   resource :card
   resource :subscription do
     patch :info
-    patch :pause
     patch :resume
   end
   resources :charges
@@ -73,7 +76,6 @@ Rails.application.routes.draw do
     resource :password
   end
 
-  resources :notifications, only: [:index, :show]
   namespace :users do
     resources :mentions, only: [:index]
   end
@@ -82,7 +84,7 @@ Rails.application.routes.draw do
   end
 
   namespace :action_text do
-    resources :embeds, only: [:create], constraints: {id: /[^\/]+/} do
+    resources :embeds, only: [:create], constraints: { id: /[^\/]+/ } do
       collection do
         get :patterns
       end
@@ -95,8 +97,6 @@ Rails.application.routes.draw do
     get :privacy
     get :pricing
   end
-
-  post :sudo, to: "users/sudo#create"
 
   match "/404", via: :all, to: "errors#not_found"
   match "/500", via: :all, to: "errors#internal_server_error"

@@ -1,0 +1,19 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Orders</h1>
+  </div>
+
+
+  <div class="bg-white rounded shadow table">
+    <%= turbo_stream_from "orders" %>
+    <div class="table-header-group font-bold">
+      <div class="table-cell p-3">Name</div>
+      <div class="table-cell p-3">Status</div>
+      <div class="table-cell p-3">Customer Name</div>
+      <div class="table-cell p-3">Actions</div>
+    </div>
+    <%= turbo_frame_tag "orders", class: "table-row-group" do %>
+        <%= render @orders %>
+    <% end %>
+  </div>
+</div>
